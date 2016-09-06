@@ -6,7 +6,7 @@ module Generics
 
     # Shared
 
-    class NotSameType < StandardError
+    class NotSameTypeError < StandardError
     end
 
     # @param [Class, Module] type
@@ -27,7 +27,7 @@ module Generics
     end
 
     def compatible!(value)
-      fail NotSameType unless value.is_a?(self.class.type)
+      fail NotSameTypeError unless compatible?(value)
       true
     end
 

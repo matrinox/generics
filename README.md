@@ -52,6 +52,78 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 - Generics in methods
 - Generics in classes
 
+
+Examples of some of the above todos:
+
+```ruby
+# Responds to generics
+Generics::List[:to_s, :to_a].new(...)
+
+# Array Generics (?)
+Generics::Hash[[String]].new(...)
+
+# Hash Generics
+Generics::Hash[String => [Integer, :to_s]].new(...)
+
+# Either
+EitherStringOrInteger = Either[String, Integer]
+Generics::List[EitherStringOrInteger].new(...)
+
+# Enums
+EnumMultiples = Enum[String, Integer, :to_s, :to_a]
+Generics::List[EnumMultiples].new(...)
+
+# Function/closure generics
+repeater = typedproc(String, #to_i, returns: String) { |string, times| string * times.to_i }
+repeater.('a', 3) # 'aaa'
+repeater.(1, 3) # exception
+
+# Method generics
+class Foo
+  type params(:T)
+  def initialize(value)
+    @value = value
+    @values = [value]
+  end
+
+  type params(Integer)
+  type return(:T)
+  def [](index)
+    return @values[index]
+  end
+
+  type params(Object)
+  type return([:T, Object])
+  def join(other)
+    [@value, other]
+  end
+end
+
+# Class Generics
+class Foo < Generics::Class[:T, :B]
+  restrict(:B) do
+    :add_to_integer
+  end
+
+  type params([:T], :B)
+  def initialize(values, constant)
+    @values = values
+    @constant = constant
+  end
+
+  type params(Integer)
+  type return([:T])
+  def [](index)
+    return @values[index]
+  end
+
+  type return(:B)
+  def sum
+    5 + constant
+  end
+end
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/generics. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
