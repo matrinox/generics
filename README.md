@@ -29,7 +29,7 @@ Or install it yourself as:
 ```ruby
 list_of_ints = Generics::List[Integer].new(1, 2, 3, 4)
 list_of_ints.add(5) # ok
-list_of_ints.add("6") # NotSameType exception
+list_of_ints.add('6') # NotSameType exception
 list_of_ints.count # 4 (immutable)
 list_of_ints.add(5).add(6).add(7).count # 7
 ```
