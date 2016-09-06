@@ -28,7 +28,7 @@ module Generics
     # TypeChecker::List[String].valid?(["1", 2]) # false
     class List < TypeChecker
       def valid?(values)
-        values.all? { |value| value.is_a?(@type) }
+        values.all? { |value| TypeChecker[@type].valid?(value) }
       end
     end
 
@@ -37,8 +37,8 @@ module Generics
     class Hash < TypeChecker
       def valid?(hash)
         hash.all? do |key, value|
-          key.is_a?(@type.keys[0])
-          value.is_a?(@type.values[0])
+          TypeChecker[@type.keys[0]].valid?(key)
+          TypeChecker[@type.values[0]].valid?(value)
         end
       end
     end
