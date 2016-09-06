@@ -1,4 +1,5 @@
 require 'hamster'
+require 'generics/type_checker'
 
 module Generics
   class List
@@ -23,7 +24,7 @@ module Generics
     end
 
     def compatible?(value)
-      value.is_a?(self.class.type)
+      TypeChecker[self.class.type].valid?(value)
     end
 
     def compatible!(value)
