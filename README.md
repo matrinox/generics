@@ -1,5 +1,13 @@
 # Generics
 
+The philosophy here is to bring as much modern language features that help developers code better, safer, and more reliably. Here are some top priorities of this library:
+
+- Immutability first with mutability as an option (e.g for speed)
+- Type safety
+- Follow functional practices
+- Use standard interfaces of Ruby
+- Fail early, throw fast
+
 ## Installation
 
 Add this line to your application's Gemfile:
