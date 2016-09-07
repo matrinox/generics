@@ -3,6 +3,7 @@ module Generics
   # TypeChecker[String].valid?("3") # true
   # TypeChecker[String].valid?(3) # false
   # TypeChecker[String].valid!(3) # exception
+  # TypeChecker[:to_f].valid!(3) # true
   class TypeChecker
     class WrongTypeError < StandardError
     end
@@ -16,7 +17,12 @@ module Generics
     end
 
     def valid?(value)
-      value.is_a?(@type)
+      case @type
+      when Class
+        value.is_a?(@type)
+      when Symbol
+        value.respond_to?(@type)
+      end
     end
 
     def valid!(value)
