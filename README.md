@@ -42,15 +42,15 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## TODO
 
-- Other collection types (at least the same list as core ruby data types and the Hamster immutable library)
-- More complex generics
-  - Responds to generics (another form of duck type, though modules are preferable)
-  - Array generics (e.g. list of strings)
-  - Hash generics (e.g. keys are numbers and values are list of strings)
-  - Either/enums (e.g. list of strings or integers of anything that responds to :x). This would require either adopting a library or creating one ourselves as a separate gem
-- Generics in functions/closures
-- Generics in methods
-- Generics in classes
+- [ ] Other collection types (at least the same list as core ruby data types and the Hamster immutable library)
+- [ ] More complex generics
+  - [x] Responds to generics (another form of duck type, though modules are preferable)
+  - [ ] Array generics (e.g. list of strings)
+  - [ ] Hash generics (e.g. keys are numbers and values are list of strings)
+  - [ ] Either/enums (e.g. list of strings or integers of anything that responds to :x). This would require either adopting a library or creating one ourselves as a separate gem
+- [ ] Generics in functions/closures
+- [ ] Generics in methods
+- [ ] Generics in classes
 
 
 Examples of some of the above todos:
