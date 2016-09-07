@@ -8,14 +8,20 @@ module Generics
     class WrongTypeError < StandardError
     end
 
+    # @param [Class, Symbol] type
+    # @return [TypeChecker]
     def self.[](type)
       new(type)
     end
 
+    # @param [Class, Symbol] type
     def initialize(type)
       @type = type
     end
 
+    # Checks if the value provided would be valid for this type
+    # @param [Object] value
+    # @return [True, False]
     def valid?(value)
       case @type
       when Class
@@ -25,6 +31,10 @@ module Generics
       end
     end
 
+    # Checks if the value provided would be valid for this type
+    # @param [Object] value
+    # @raise [WrongTypeError] value is not of the correct type
+    # @return [True, False]
     def valid!(value)
       fail WrongTypeError unless valid?(value)
     end
@@ -33,6 +43,8 @@ module Generics
     # TypeChecker::List[String].valid?(["1", "2"]) # true
     # TypeChecker::List[String].valid?(["1", 2]) # false
     class List < TypeChecker
+      # @param [Array<Object>] values
+      # @return [True, False]
       def valid?(values)
         values.all? { |value| TypeChecker[@type].valid?(value) }
       end
@@ -41,6 +53,8 @@ module Generics
     # Example use:
     # TypeChecker::Hash[String => Integer].valid?('test' => 3) # true
     class Hash < TypeChecker
+      # @param [Hash<Object, Object >] hash
+      # @return [True, False]
       def valid?(hash)
         hash.all? do |key, value|
           TypeChecker[@type.keys[0]].valid?(key)
