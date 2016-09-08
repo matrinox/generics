@@ -1,3 +1,5 @@
+require 'generics/type_checker'
+
 module Generics
   class NotCompatibleError < StandardError
   end

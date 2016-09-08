@@ -48,7 +48,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
   - [ ] Array generics (e.g. list of strings)
   - [ ] Hash generics (e.g. keys are numbers and values are list of strings)
   - [ ] Either/enums (e.g. list of strings or integers of anything that responds to :x). This would require either adopting a library or creating one ourselves as a separate gem
-- [ ] Generics in functions/closures
+- [x] Generics in functions/closures
 - [ ] Generics in methods
 - [ ] Generics in classes
 

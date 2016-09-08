@@ -5,3 +5,4 @@ module Generics
 end
 
 require 'generics/collections/list'
+require 'generics/functions/proc'
