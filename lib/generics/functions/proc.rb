@@ -3,22 +3,22 @@ require 'generics/type_checker'
 class Object
   # Example:
   # typedproc(String, :to_i, returns: String) { |string, times| string * times.to_i }
-  # @param [Class, Module, Symbol] type
-  # @param [Proc] block
-  # @return [Proc]
-  def typedproc(*args, &block)
-    Generics::Proc.typed(*args, &block)
+  # @param [Array<Class, Module, Symbol>] types
+  # @param [Generics::Proc] block
+  # @return [Generics::Proc]
+  def typedproc(*types, &block)
+    Generics::Proc.typed(*types, &block)
   end
 end
 
 module Generics
   class Proc
     # Example:
-    # Proc[String, :to_i, returns: String] { }
-    # @param [Class, Module, Symbol] type
+    # Generics::Proc.typed(String, :to_i, returns: String) { }
+    # @param [Array<Class, Module, Symbol>] types
     # @param [Proc] block
     # @param [optional, Class, Module, Symbol] returns the return type or nil for void
-    # @return [Proc]
+    # @return [Generics::Proc]
     def self.typed(*types, returns: nil, &block)
       return proc do |*args|
         unless types.length == args.length

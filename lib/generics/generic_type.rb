@@ -15,7 +15,7 @@ module Generics
       end
     end
 
-    # @param [Class, Module, Symbol] tpye
+    # @param [Class, Module, Symbol] type
     def initialize(type)
       @type_checker = TypeChecker[type]
       @type = type
@@ -27,7 +27,7 @@ module Generics
 
     # Check if value is valid in current state with exception
     # @param [Object] value
-    # @raise [NotCompatibleError]
+    # @raise [Generics::NotCompatibleError]
     # @return [True, False]
     def valid!(value)
       fail NotCompatibleError unless @type_checker.valid?(value)
@@ -83,7 +83,7 @@ module Generics
 
     # Check if value is valid in current state with exception
     # @param [Object] value
-    # @raise [NotCompatibleError]
+    # @raise [Generics::NotCompatibleError]
     # @return [True, False]
     def valid!(value)
       fail NotCompatibleError unless valid?(value)

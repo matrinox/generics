@@ -109,7 +109,7 @@ module Generics
 
     # @!group Immutable only
 
-    # @param [Class, Module, Symbol] type
+    # @param [Array<Object>] collection
     def initialize(*collection)
       collection.each { |value| compatible!(value) }
       @collection = ::Hamster::Vector.new(collection)
@@ -188,7 +188,7 @@ module Generics
       self.class.new(*@collection.shift)
     end
 
-    # @param [Array] *args
+    # @param [Array] args
     # @return [Generics::List]
     def slice(*args)
       self.class.new(@collection.slice(*args))
@@ -204,7 +204,7 @@ module Generics
     # @!endgroup
 
     class Mutable < List
-      # @param [Class, Module, Symbol] type
+      # @param [Array<Object>] collection
       def initialize(*collection)
         collection.each { |value| compatible!(value) }
         @collection = collection.freeze
@@ -232,7 +232,6 @@ module Generics
         @collection[index] = value
       end
 
-      # @param [Integer] index
       # @param [Object] value
       # @return [Generics::List::Mutable]
       def add(value)
@@ -254,7 +253,7 @@ module Generics
       end
 
       # @param [Integer] index
-      # @param [Array<Object>] *values
+      # @param [Array<Object>] values
       # @return [Generics::List::Mutable]
       def insert(index, *values)
         values.each { |value| compatible!(value) }
@@ -289,7 +288,7 @@ module Generics
         @collection.shift
       end
 
-      # @param [Array] *args
+      # @param [Array] args
       # @return [Generics::List::Mutable]
       def slice(*args)
         self.class.new(@collection.slice(*args))
