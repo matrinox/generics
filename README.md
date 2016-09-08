@@ -47,7 +47,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
   - [x] Responds to generics (another form of duck type, though modules are preferable)
   - [ ] Array generics (e.g. list of strings)
   - [ ] Hash generics (e.g. keys are numbers and values are list of strings)
-  - [ ] Either/enums (e.g. list of strings or integers of anything that responds to :x). This would require either adopting a library or creating one ourselves as a separate gem
+  - [x] Either/enums (e.g. list of strings or integers of anything that responds to :x). This would require either adopting a library or creating one ourselves as a separate gem
 - [x] Generics in functions/closures
 - [ ] Generics in methods
 - [ ] Generics in classes

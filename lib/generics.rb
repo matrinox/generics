@@ -6,3 +6,4 @@ end
 
 require 'generics/collections/list'
 require 'generics/functions/proc'
+require 'generics/monads/enum'
