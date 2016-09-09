@@ -39,10 +39,12 @@ module Generics
       true
     end
 
+    # @return [String]
     def inspect
       "#<#{self.class.name}[#{self.class.type}]: #{to_s}>"
     end
 
+    # @return [String]
     def to_s
       @collection.to_a.to_s
     end

@@ -22,6 +22,9 @@ module Generics
       @type = type
     end
 
+    # Check if value is valid in current state
+    # @param [Object] value
+    # @return [True, False]
     def valid?(value)
       @type_checker.valid?(value)
     end

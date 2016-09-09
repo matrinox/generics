@@ -26,12 +26,28 @@ Or install it yourself as:
 
 ## Usage
 
+Lists
 ```ruby
 list_of_ints = Generics::List[Integer].new(1, 2, 3, 4)
 list_of_ints.add(5) # ok
 list_of_ints.add('6') # NotSameType exception
 list_of_ints.count # 4 (immutable)
 list_of_ints.add(5).add(6).add(7).count # 7
+```
+
+Closures
+```ruby
+string_repeater = typedproc(String, :to_i, returns: String) { |string, repeat| string * repeat.to_i }
+multipler = Proc.typed(Numeric, Numeric, returns: Numeric) { |a, b| a * b }
+```
+
+Discover commonality between objects
+```ruby
+gt = Generics::GenericType[:T]
+gt << 3
+gt << 3.0
+gt.shared_class # Numeric
+gt.shared_modules # [Comparable]
 ```
 
 ## Development
@@ -47,10 +63,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
   - [x] Responds to generics (another form of duck type, though modules are preferable)
   - [ ] Array generics (e.g. list of strings)
   - [ ] Hash generics (e.g. keys are numbers and values are list of strings)
-  - [x] Either/enums (e.g. list of strings or integers of anything that responds to :x). This would require either adopting a library or creating one ourselves as a separate gem
+  - [ ] Either/enums (e.g. list of strings or integers of anything that responds to :x). This would require either adopting a library or creating one ourselves as a separate gem
 - [x] Generics in functions/closures
+  - [Generates docs]
 - [ ] Generics in methods
+  - [Generates docs]
 - [ ] Generics in classes
+  - [Generates docs]
 
 
 Examples of some of the above todos:
