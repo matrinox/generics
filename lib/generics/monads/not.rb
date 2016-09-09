@@ -15,15 +15,15 @@ module Generics
     # @param [Class, Module, Symbol] left
     # @param [Class, Module, Symbol] right
     def initialize(left, right)
-      @left = left
-      @right = right
+      @left = TypeChecker[left]
+      @right = TypeChecker[right]
     end
 
     # Checks if value is valid in the available enum types
     # @param [Object] value
     # @return [True, False]
     def valid?(value)
-      !TypeChecker[@left].valid?(value) && !TypeChecker[@right].valid?(value)
+      !@left.valid?(value) && !@right.valid?(value)
     end
   end
 end

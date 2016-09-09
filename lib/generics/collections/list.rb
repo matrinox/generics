@@ -16,6 +16,7 @@ module Generics
     def self.[](type)
       Class.new(self).tap do |klass|
         klass.instance_variable_set('@type', type)
+        klass.instance_variable_set('@type_checker', TypeChecker[type])
         klass.define_singleton_method(:name) { klass.superclass.name }
       end
     end
@@ -25,10 +26,15 @@ module Generics
       @type
     end
 
+    # @return [TypeChecker] type_checker
+    def self.type_checker
+      @type_checker
+    end
+
     # @param [Object] value
     # @return [True, False]
     def compatible?(value)
-      TypeChecker[self.class.type].valid?(value)
+      self.class.type_checker.valid?(value)
     end
 
     # @param [Object] value

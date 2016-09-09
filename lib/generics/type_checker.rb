@@ -5,6 +5,8 @@ module Generics
   # Generics::TypeChecker[String].valid!(3) # exception
   # Generics::TypeChecker[:to_f].valid!(3) # true
   class TypeChecker
+    attr_reader :type
+
     class WrongTypeError < StandardError
     end
 
@@ -14,8 +16,24 @@ module Generics
       new(type)
     end
 
+    # Check if the type is valid or requires stricter definition
+    # @param [Class, Symbol, Module] type
+    # @return [True, False]
+    def self.valid_type?(type)
+      if type.is_a?(Class) && type.included_modules.include?(Enumerable)
+        false
+      elsif type.to_s =~ /.*Struct/
+        false
+      elsif type.class.included_modules.include?(Enumerable) && type.count == 0
+        false
+      else
+        true
+      end
+    end
+
     # @param [Class, Symbol, Module] type
     def initialize(type)
+      fail ArgumentError unless self.class.valid_type?(type)
       @type = type
     end
 

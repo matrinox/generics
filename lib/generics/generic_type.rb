@@ -19,7 +19,6 @@ module Generics
     # @param [Class, Module, Symbol] type
     def initialize(type)
       @type_checker = TypeChecker[type]
-      @type = type
     end
 
     # Check if value is valid in current state
