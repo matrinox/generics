@@ -34,7 +34,7 @@ module Generics
     # @raise [Generics::NotCompatibleError]
     # @return [True, False]
     def valid!(value)
-      fail NotCompatibleError unless @type_checker.valid?(value)
+      fail NotCompatibleError, value unless @type_checker.valid?(value)
     end
   end
 
@@ -70,7 +70,7 @@ module Generics
         shared_modules = @shared_modules & value.class.included_modules
 
         if !common_ancestor && shared_modules.empty?
-          fail NotCompatibleError
+          fail NotCompatibleError, value
         end
 
         @shared_class = common_ancestor
@@ -93,7 +93,7 @@ module Generics
     # @raise [Generics::NotCompatibleError]
     # @return [True, False]
     def valid!(value)
-      fail NotCompatibleError unless valid?(value)
+      fail NotCompatibleError, value unless valid?(value)
     end
 
     private def find_common_ancestor(klassA, klassB)

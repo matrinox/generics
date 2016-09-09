@@ -32,10 +32,10 @@ module Generics
     end
 
     # @param [Object] value
-    # @raise [NotSameTypeError ] value is not of the correct type
+    # @raise [NotSameTypeError] value is not of the correct type
     # @return [True, False]
     def compatible!(value)
-      fail NotSameTypeError unless compatible?(value)
+      fail NotSameTypeError, value unless compatible?(value)
       true
     end
 

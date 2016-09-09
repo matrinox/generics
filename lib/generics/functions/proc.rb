@@ -22,7 +22,7 @@ module Generics
     def self.typed(*types, returns: nil, &block)
       return proc do |*args|
         unless types.length == args.length
-          fail ArgumentError, "wrong number of arguments (given #{args.length}, expected #{types.length})"
+          fail ArgumentError, args, "wrong number of arguments (given #{args.length}, expected #{types.length})"
         end
         types.each_with_index do |type, index|
           arg = args[index]

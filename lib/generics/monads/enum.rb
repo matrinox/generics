@@ -11,11 +11,11 @@ module Generics
     # @param [Array<Class, Module, Symbol>] options
     # @return [Generics::Enum]
     def self.[](*options)
-      new(options)
+      new(*options)
     end
 
     # @param [Array<Class, Module, Symbol>] options
-    def initialize(options)
+    def initialize(*options)
       @options = options
     end
 
@@ -31,7 +31,7 @@ module Generics
     # @raise [Generics::NotOneOfTypeError]
     # @return [True, False]
     def valid!(value)
-      fail NotOneOfTypeError unless valid?(value)
+      fail NotOneOfTypeError, value unless valid?(value)
     end
   end
 end

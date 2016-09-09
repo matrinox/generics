@@ -1,5 +1,5 @@
 module Generics
-  # Example use:
+  # Example uses:
   # Generics::TypeChecker[String].valid?("3") # true
   # Generics::TypeChecker[String].valid?(3) # false
   # Generics::TypeChecker[String].valid!(3) # exception
@@ -8,13 +8,13 @@ module Generics
     class WrongTypeError < StandardError
     end
 
-    # @param [Class, Symbol] type
+    # @param [Class, Symbol, Module] type
     # @return [Generics::TypeChecker]
     def self.[](type)
       new(type)
     end
 
-    # @param [Class, Symbol] type
+    # @param [Class, Symbol, Module] type
     def initialize(type)
       @type = type
     end
@@ -28,6 +28,8 @@ module Generics
         value.is_a?(@type)
       when Symbol
         value.respond_to?(@type)
+      when Enum
+        @type.valid?(value)
       end
     end
 
@@ -36,10 +38,10 @@ module Generics
     # @raise [Generics::WrongTypeError] value is not of the correct type
     # @return [True, False]
     def valid!(value)
-      fail WrongTypeError unless valid?(value)
+      fail WrongTypeError, value unless valid?(value)
     end
 
-    # Example use:
+    # Example uses:
     # Generics::TypeChecker::List[String].valid?(["1", "2"]) # true
     # Generics::TypeChecker::List[String].valid?(["1", 2]) # false
     class List < TypeChecker
@@ -50,7 +52,7 @@ module Generics
       end
     end
 
-    # Example use:
+    # Example uses:
     # Generics::TypeChecker::Hash[String => Integer].valid?('test' => 3) # true
     class Hash < TypeChecker
       # @param [Hash<Object, Object >] hash
