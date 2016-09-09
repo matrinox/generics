@@ -1,3 +1,4 @@
+require 'hamster'
 require 'generics/type_checker'
 
 module Generics
@@ -35,6 +36,8 @@ module Generics
   end
 
   class GenericType
+    attr_reader :name, :shared_class, :shared_modules, :value
+
     # @param [Symbol] name
     # @return [GenericType]
     def self.[](name)
@@ -44,9 +47,9 @@ module Generics
     # @param [Symbol] name
     def initialize(name)
       @name = name
-      @values = []
-      @shared_superclass = nil
-      @shared_modules = []
+      @values = Hamster::Vector.new
+      @shared_class = nil
+      @shared_modules = Hamster::Set.new
     end
 
     # Add value, narrowing (possibly) the shared class or modules
@@ -54,22 +57,23 @@ module Generics
     # @return [Object] same value
     def <<(value)
       if @values.empty?
-        @shared_superclass = value.class
-        @shared_modules = value.class.included_modules
+        @shared_class = value.class
+        # Ignore Kernel, which is in every Object class
+        @shared_modules = Hamster::Set.new(value.class.included_modules - [Kernel])
       else
-        common_ancestor = find_common_ancestor(@shared_superclass, value.class)
+        common_ancestor = find_common_ancestor(@shared_class, value.class)
         # Ignore Object/BasicObject ancestors
-        common_ancestor = nil if common_ancestor == BasicObject || common_ancestor == Object
-        shared_modules = value.class.included_modules & @shared_modules - [Kernel]
+        common_ancestor = nil if common_ancestor == Object || common_ancestor == BasicObject
+        shared_modules = @shared_modules & value.class.included_modules
 
         if !common_ancestor && shared_modules.empty?
           fail NotCompatibleError
         end
 
-        @shared_superclass = common_ancestor
+        @shared_class = common_ancestor
         @shared_modules = shared_modules
       end
-      @values << value
+      @values = @values.add(value)
     end
 
     # Check if value is valid in current state. This is not the same as adding it as adding it could change the
@@ -77,7 +81,7 @@ module Generics
     # @param [Object] value
     # @return [True, False]
     def valid?(value)
-      return true if value.is_a?(@shared_superclass)
+      return true if value.is_a?(@shared_class)
       @shared_modules.any? { |m| value.is_a?(m) }
     end
 
