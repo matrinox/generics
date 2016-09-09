@@ -20,12 +20,16 @@ module Generics
     # @param [Class, Symbol, Module] type
     # @return [True, False]
     def self.valid_type?(type)
+      return false unless [Class, Module, Symbol, Enumerable].any? { |valid_type| type.is_a?(valid_type) }
       if type.is_a?(Class) && type.included_modules.include?(Enumerable)
         false
       elsif type.to_s =~ /.*Struct/
         false
-      elsif type.class.included_modules.include?(Enumerable) && type.count == 0
-        false
+      elsif type.is_a?(Enumerable)
+        return false if type.count == 0
+        type.all? do |*args|
+          args.all? { |arg| valid_type?(arg) }
+        end
       else
         true
       end
@@ -48,6 +52,18 @@ module Generics
         value.respond_to?(@type)
       when Enum
         @type.valid?(value)
+      when Array
+        # Value must also be an array type
+        return false unless value.is_a?(Array)
+        # Check all values against any type
+        @type.any? do |t|
+          type_checker = TypeChecker[t]
+          value.all? { |v| type_checker.valid?(v) }
+        end
+      when Hash
+        # TODO: hashes
+      when Enumerable
+        # TODO: other enumerables, perhaps use the same here for both Array/Hash
       end
     end
 
@@ -66,7 +82,8 @@ module Generics
       # @param [Array<Object>] values
       # @return [True, False]
       def valid?(values)
-        values.all? { |value| TypeChecker[@type].valid?(value) }
+        type_checker = TypeChecker[@type]
+        values.all? { |value| type_checker.valid?(value) }
       end
     end
 
