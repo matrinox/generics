@@ -1,4 +1,4 @@
-require 'hamster'
+require 'immutable'
 require 'generics/type_checker'
 
 module Generics
@@ -120,7 +120,7 @@ module Generics
     # @param [Array<Object>] collection
     def initialize(*collection)
       collection.each { |value| compatible!(value) }
-      @collection = ::Hamster::Vector.new(collection)
+      @collection = ::Immutable::Vector.new(collection)
     end
 
     # Does not preserve frozen state and does not copy singleton state

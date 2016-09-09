@@ -43,5 +43,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry-doc', '~> 0.9.0'
   spec.add_development_dependency 'pry-highlight', '~> 0.1.0'
 
-  spec.add_dependency 'hamster', '>= 3.0.0'
+  spec.add_dependency 'immutable-ruby', '>= 0.0.1'
 end

@@ -1,4 +1,4 @@
-require 'hamster'
+require 'immutable'
 require 'generics/type_checker'
 
 module Generics
@@ -49,9 +49,9 @@ module Generics
     # @param [Symbol] name
     def initialize(name)
       @name = name
-      @values = Hamster::Vector.new
+      @values = Immutable::Vector.new
       @shared_class = nil
-      @shared_modules = Hamster::Set.new
+      @shared_modules = Immutable::Set.new
     end
 
     # Add value, narrowing (possibly) the shared class or modules
@@ -61,7 +61,7 @@ module Generics
       if @values.empty?
         @shared_class = value.class
         # Ignore Kernel, which is in every Object class
-        @shared_modules = Hamster::Set.new(value.class.included_modules - [Kernel])
+        @shared_modules = Immutable::Set.new(value.class.included_modules - [Kernel])
       else
         common_ancestor = find_common_ancestor(@shared_class, value.class)
         # Ignore Object/BasicObject ancestors
