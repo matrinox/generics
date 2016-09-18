@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 rm -rf Generics/
 rm -rf js/
 rm -rf css/
