@@ -125,10 +125,20 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
 
 
 
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="TypeChecker/Hash.html" title="Generics::TypeChecker::Hash (class)">Hash</a></span>, <span class='object_link'><a href="TypeChecker/List.html" title="Generics::TypeChecker::List (class)">List</a></span>, <span class='object_link'><a href="TypeChecker/WrongTypeError.html" title="Generics::TypeChecker::WrongTypeError (class)">WrongTypeError</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="TypeChecker/Hash.html" title="Generics::TypeChecker::Hash (class)">Hash</a></span>, <span class='object_link'><a href="TypeChecker/List.html" title="Generics::TypeChecker::List (class)">List</a></span>
 
 
 </p>
+
+  <h2>Constant Summary</h2>
+  <dl class="constants">
+
+      <dt id="WrongTypeError-constant" class="">WrongTypeError =
+
+      </dt>
+      <dd><pre class="code"><span class='const'>Class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>StandardError</span><span class='rparen'>)</span></pre></dd>
+
+  </dl>
 
 
 
@@ -354,13 +364,13 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
       <pre class="lines">
 
 
+38
 39
 40
-41
-42</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_fail'>fail</span> <span class='const'>ArgumentError</span> <span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_valid_type?'>valid_type?</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
@@ -478,12 +488,12 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
       <pre class="lines">
 
 
+14
 15
-16
-17</pre>
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
@@ -547,6 +557,7 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
       <pre class="lines">
 
 
+21
 22
 23
 24
@@ -560,17 +571,16 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
 32
 33
 34
-35
-36</pre>
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_valid_type?'>valid_type?</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='lbracket'>[</span><span class='const'>Class</span><span class='comma'>,</span> <span class='const'>Module</span><span class='comma'>,</span> <span class='const'>Symbol</span><span class='comma'>,</span> <span class='const'>Enumerable</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_valid_type'>valid_type</span><span class='op'>|</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='id identifier rubyid_valid_type'>valid_type</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_included_modules'>included_modules</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'>Enumerable</span><span class='rparen'>)</span>
     <span class='kw'>false</span>
-  <span class='kw'>elsif</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>.*Struct</span><span class='regexp_end'>/</span></span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_end_with?'>end_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Struct</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
     <span class='kw'>false</span>
   <span class='kw'>elsif</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Enumerable</span><span class='rparen'>)</span>
     <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='op'>==</span> <span class='int'>0</span>
@@ -664,12 +674,12 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
       <pre class="lines">
 
 
+73
 74
-75
-76</pre>
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid!'>valid!</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_fail'>fail</span> <span class='const'>WrongTypeError</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span> <span class='kw'>unless</span> <span class='id identifier rubyid_valid?'>valid?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -733,6 +743,7 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
       <pre class="lines">
 
 
+46
 47
 48
 49
@@ -753,11 +764,10 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
 64
 65
 66
-67
-68</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/type_checker.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid?'>valid?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='ivar'>@type</span>
@@ -791,7 +801,7 @@ href=":to_f">Generics::TypeChecker</a>.valid!(3) # true</p>
 </div>
 
       <div id="footer">
-  Generated on Wed Sep 14 13:31:23 2016 by
+  Generated on Fri Oct 14 16:55:18 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>

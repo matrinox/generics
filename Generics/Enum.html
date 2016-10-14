@@ -116,16 +116,16 @@
   <h2>Direct Known Subclasses</h2>
   <p class="children"><span class='object_link'><a href="And.html" title="Generics::And (class)">And</a></span>, <span class='object_link'><a href="Either.html" title="Generics::Either (class)">Either</a></span>, <span class='object_link'><a href="Not.html" title="Generics::Not (class)">Not</a></span>, <span class='object_link'><a href="XOR.html" title="Generics::XOR (class)">XOR</a></span></p>
 </div>
-<h2>Defined Under Namespace</h2>
-<p class="children">
 
+  <h2>Constant Summary</h2>
+  <dl class="constants">
 
+      <dt id="NotOneOfTypeError-constant" class="">NotOneOfTypeError =
 
+      </dt>
+      <dd><pre class="code"><span class='const'>Class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>StandardError</span><span class='rparen'>)</span></pre></dd>
 
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Enum/NotOneOfTypeError.html" title="Generics::Enum::NotOneOfTypeError (class)">NotOneOfTypeError</a></span>
-
-
-</p>
+  </dl>
 
 
 
@@ -295,12 +295,12 @@
       <pre class="lines">
 
 
+17
 18
-19
-20</pre>
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_types'>types</span><span class='rparen'>)</span>
   <span class='ivar'>@type_checkers</span> <span class='op'>=</span> <span class='id identifier rubyid_types'>types</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type'>type</span><span class='op'>|</span> <span class='const'>TypeChecker</span><span class='lbracket'>[</span><span class='id identifier rubyid_type'>type</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
@@ -371,12 +371,12 @@
       <pre class="lines">
 
 
+12
 13
-14
-15</pre>
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='op'>[]</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_types'>types</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_types'>types</span><span class='rparen'>)</span>
@@ -459,12 +459,12 @@
       <pre class="lines">
 
 
+32
 33
-34
-35</pre>
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid!'>valid!</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_fail'>fail</span> <span class='const'>NotOneOfTypeError</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span> <span class='kw'>unless</span> <span class='id identifier rubyid_valid?'>valid?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
@@ -528,12 +528,12 @@
       <pre class="lines">
 
 
+24
 25
-26
-27</pre>
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/generics/monads/enum.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid?'>valid?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='ivar'>@type_checkers</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_type_checker'>type_checker</span><span class='op'>|</span> <span class='id identifier rubyid_type_checker'>type_checker</span><span class='period'>.</span><span class='id identifier rubyid_valid?'>valid?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -548,7 +548,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Sep 14 13:31:23 2016 by
+  Generated on Fri Oct 14 16:55:18 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>
