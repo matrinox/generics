@@ -7,8 +7,7 @@ module Generics
   class TypeChecker
     attr_reader :type
 
-    class WrongTypeError < StandardError
-    end
+    WrongTypeError = Class.new(StandardError)
 
     # @param [Class, Symbol, Module] type
     # @return [Generics::TypeChecker]

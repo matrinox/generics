@@ -6,8 +6,7 @@ module Generics
     include SharedEnumerable
     include SharedList
 
-    class NotSameTypeError < StandardError
-    end
+    NotSameTypeError = Class.new(StandardError)
 
     def self.new(*args)
       Immutable.new(*args)
