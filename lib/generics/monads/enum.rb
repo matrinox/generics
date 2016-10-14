@@ -4,8 +4,7 @@ module Generics
   # Example
   # Generics::Enum[String, :to_i, Comparable].valid?("test")
   class Enum
-    class NotOneOfTypeError < StandardError
-    end
+    NotOneOfTypeError = Class.new(StandardError)
 
     # Creates an enum that only allows objects of the available types
     # @param [Array<Class, Module, Symbol>] types

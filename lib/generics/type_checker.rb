@@ -7,8 +7,7 @@ module Generics
   class TypeChecker
     attr_reader :type
 
-    class WrongTypeError < StandardError
-    end
+    WrongTypeError = Class.new(StandardError)
 
     # @param [Class, Symbol, Module] type
     # @return [Generics::TypeChecker]
@@ -23,7 +22,7 @@ module Generics
       return false unless [Class, Module, Symbol, Enumerable].any? { |valid_type| type.is_a?(valid_type) }
       if type.is_a?(Class) && type.included_modules.include?(Enumerable)
         false
-      elsif type.to_s =~ /.*Struct/
+      elsif type.to_s.end_with?('Struct')
         false
       elsif type.is_a?(Enumerable)
         return false if type.count == 0

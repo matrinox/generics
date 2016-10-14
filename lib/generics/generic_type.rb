@@ -2,8 +2,7 @@ require 'immutable'
 require 'generics/type_checker'
 
 module Generics
-  class NotCompatibleError < StandardError
-  end
+  NotCompatibleError = Class.new(StandardError)
 
   class StrictType
     # Return a subclass of StrictType that can be instantiated with a type
