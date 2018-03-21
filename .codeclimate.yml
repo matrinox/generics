@@ -5,20 +5,18 @@ engines:
     config:
       languages:
       - ruby
-      - javascript
-      - python
-      - php
+  brakeman:
+    enabled: true
+  bundler-audit:
+    enabled: true
   fixme:
     enabled: true
   rubocop:
     enabled: true
+  markdownlint:
+    enabled: true
 ratings:
   paths:
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
   - "**.rb"
+  - "**.md"
 exclude_paths: []
